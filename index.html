@@ -86,6 +86,7 @@ body{
     radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,149,0,0.04) 0%, transparent 60%);
 }
 
+/* ===== LOADER — FIX: A harfi dumaloq ichida ===== */
 #loader{
   position:fixed;inset:0;z-index:9999;
   background:#000;
@@ -94,13 +95,29 @@ body{
   transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),visibility 0.7s;
 }
 #loader.out{opacity:0;visibility:hidden;pointer-events:none}
+
+/* Dumaloq spinner va ichida A harfi */
+.loader-avatar{
+  position:relative;
+  width:80px;height:80px;
+  margin-bottom:24px;
+}
+.loader-avatar-inner{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,#ff3b30 0%,#ff9500 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-weight:800;color:#fff;
+  font-family:var(--font);
+  position:relative;z-index:1;
+  box-shadow:0 0 30px rgba(255,59,48,0.5);
+}
 .loader-ring{
-  width:72px;height:72px;border-radius:50%;
+  position:absolute;inset:-4px;border-radius:50%;
   border:2px solid rgba(255,255,255,0.06);
   border-top:2px solid var(--accent);
   animation:lspin 0.9s linear infinite;
-  margin-bottom:24px;
-  box-shadow:0 0 24px rgba(255,59,48,0.4);
+  box-shadow:0 0 20px rgba(255,59,48,0.4);
+  z-index:2;
 }
 @keyframes lspin{to{transform:rotate(360deg)}}
 .loader-logo{font-size:22px;font-weight:700;letter-spacing:-0.02em;color:#fff;margin-bottom:8px}
@@ -204,7 +221,7 @@ body{
 .lang-opt.cur{color:var(--accent)}
 .lang-sep{height:1px;background:var(--glass-border);margin:3px 0}
 
-/* ===== MOBILE MENU — CHAP TOMONDA ===== */
+/* ===== MOBILE MENU ===== */
 #mmenu{
   position:fixed;
   top:0;left:0;bottom:0;
@@ -219,7 +236,6 @@ body{
   box-shadow:4px 0 40px rgba(0,0,0,0.5);
 }
 #mmenu.open{transform:translateX(0)}
-/* Overlay for mobile menu */
 #mmenu-overlay{
   position:fixed;inset:0;z-index:175;
   background:rgba(0,0,0,0.55);
@@ -621,11 +637,11 @@ section{position:relative;z-index:1}
   padding:28px;position:relative;
 }
 
-/* ===== TESTIMONIALS — MOBIL UCHUN TO'LIQ ===== */
+/* ===== TESTIMONIALS — MOBIL UCHUN TO'LIQ TUZATILGAN ===== */
 .testimonials-outer{
   overflow:hidden;
   padding:8px 4px 16px;
-  /* Clip qilmaymiz — scrollga yo'l beramiz */
+  width:100%;
 }
 .test-track{
   display:flex;
@@ -634,11 +650,9 @@ section{position:relative;z-index:1}
   will-change:transform;
 }
 .test-card{
-  /* Mobilda ekran kengligiga qarab o'lcham olsin */
-  min-width:min(360px, calc(100vw - 48px));
-  max-width:min(360px, calc(100vw - 48px));
+  /* Kenglik JS orqali dinamik belgilanadi */
   flex-shrink:0;
-  /* Testimonial kartalar uchavib ketmasin */
+  /* Hover hover effektini o'chiramiz — slider uchun */
   transform:none !important;
   transition:border-color 0.3s, box-shadow 0.3s !important;
 }
@@ -647,15 +661,9 @@ section{position:relative;z-index:1}
   border-color:var(--glass-border-strong);
   box-shadow:0 12px 40px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.08) inset;
 }
-
-@media(max-width:480px){
-  .test-card{
-    min-width:calc(100vw - 40px) !important;
-    max-width:calc(100vw - 40px) !important;
-  }
-  .test-card .test-inner{
-    padding:18px !important;
-  }
+.test-inner{
+  padding:24px;
+  height:100%;
 }
 
 /* ===== ACHIEVEMENT ===== */
@@ -718,8 +726,12 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 
 <div class="bg-mesh"></div>
 
+<!-- LOADER — FIX: Dumaloq ichida A harfi -->
 <div id="loader">
-  <div class="loader-ring"></div>
+  <div class="loader-avatar">
+    <div class="loader-avatar-inner">A</div>
+    <div class="loader-ring"></div>
+  </div>
   <div class="loader-logo">Artur<span>.</span>SH</div>
   <div class="loader-sub" id="loader-lbl">Yuklanmoqda</div>
   <div class="loader-progress"><div class="loader-fill" id="loader-fill"></div></div>
@@ -730,7 +742,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 <canvas id="particles-canvas"></canvas>
 <div class="toast g-strong" id="toast"></div>
 
-<!-- NAV -->
+<!-- NAV — FIX: Qidiruv ikonasi to'g'irlandi (SVG stroke-width kichraytitildi, o'lchami aniq) -->
 <nav id="nav" class="g-strong">
   <div class="nav-links-md" style="display:flex;align-items:center;gap:2px">
     <a href="#hero" class="nav-link" data-n="nav.home">Bosh sahifa</a>
@@ -758,8 +770,12 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
       <svg id="ico-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg id="ico-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
-    <button class="nav-btn" id="cmd-btn" title="Qidirish (Ctrl+K)">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <!-- FIX: Qidiruv ikonasi — to'g'ri SVG viewBox va o'lcham -->
+    <button class="nav-btn" id="cmd-btn" title="Qidirish (Ctrl+K)" style="position:relative">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
     </button>
     <button class="nav-btn nav-mobile-btn" id="mb-btn">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -770,12 +786,11 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 <!-- MOBILE MENU OVERLAY -->
 <div id="mmenu-overlay" onclick="closeMobileMenu()"></div>
 
-<!-- MOBILE MENU — CHAP TOMONDA -->
+<!-- MOBILE MENU -->
 <div id="mmenu" class="g-ultra">
   <button class="mm-close" id="mm-close" onclick="closeMobileMenu()">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
-  <!-- Logo -->
   <div style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:24px;color:var(--text)">Artur<span style="color:var(--accent)">.</span>SH</div>
   <a href="#hero" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">01</span><span data-n="nav.home">Bosh sahifa</span></a>
   <a href="#about" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">02</span><span data-n="nav.about">Men haqimda</span></a>
@@ -784,7 +799,6 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   <a href="#projects" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">05</span><span data-n="nav.projects">Loyihalar</span></a>
   <a href="#game" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">06</span><span data-n="nav.game">O'yin</span></a>
   <a href="#contact" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">07</span><span data-n="nav.contact">Aloqa</span></a>
-  <!-- Social links pastda -->
   <div style="margin-top:auto;padding-top:24px;display:flex;gap:8px">
     <a href="https://github.com/shodiyevartur1-pixel" target="_blank" class="social"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
     <a href="https://t.me/shdyvv" target="_blank" class="social"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></a>
@@ -1157,21 +1171,24 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 </section>
 <style>@media(max-width:768px){.game-grid{grid-template-columns:1fr!important}}</style>
 
-<!-- TESTIMONIALS -->
+<!-- TESTIMONIALS — FIX: Mobil uchun to'liq tuzatildi -->
 <section id="testimonials" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:48px">
       <div class="sec-label rev"><span>✦</span><span>Fikrlar</span></div>
       <h2 class="sec-title rev d1">Iltifotlar</h2>
     </div>
-    <div class="rev d2 testimonials-outer">
-      <div class="test-track" id="ttrack"></div>
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px">
-        <button id="tprev" class="btn btn-s" style="padding:8px;border-radius:50%;width:36px;height:36px;justify-content:center">
+    <div class="rev d2">
+      <!-- Wrapper overflow:hidden qilinadi, lekin kenglik aniq beriladi -->
+      <div style="overflow:hidden;width:100%;padding:8px 0 16px">
+        <div class="test-track" id="ttrack"></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px">
+        <button id="tprev" class="btn btn-s" style="padding:0;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <div id="tdots" style="display:flex;gap:5px"></div>
-        <button id="tnext" class="btn btn-s" style="padding:8px;border-radius:50%;width:36px;height:36px;justify-content:center">
+        <button id="tnext" class="btn btn-s" style="padding:0;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
@@ -1419,7 +1436,7 @@ window.addEventListener('scroll',()=>{
   document.querySelectorAll('.nav-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
 });
 
-// MOBILE MENU — CHAP TOMONDA
+// MOBILE MENU
 function openMobileMenu(){
   document.getElementById('mmenu').classList.add('open');
   document.getElementById('mmenu-overlay').classList.add('open');
@@ -1578,7 +1595,7 @@ function openModal(id){
 function closeModal(){document.getElementById('proj-modal').classList.remove('open')}
 document.getElementById('proj-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 
-// TESTIMONIALS
+// ===== TESTIMONIALS — FIX: Dinamik kenglik hisoblash =====
 const TESTS=[
   {n:'Alisher Karimov',r:'CEO, TechHub',t:"Artur ajoyib elektron savdo platformasini yetkazib berdi. Uning kod sifati va e'tiborlari ajoyib."},
   {n:'Dilnoza Rahimova',r:'Mahsulot Menejeri',t:'Artur bilan ishlash zavq edi. U loyihaning texnik va biznes tomonlarini yaxshi tushunadi.'},
@@ -1588,40 +1605,71 @@ const TESTS=[
 let tIdx=0;
 
 function renderTests(){
-  document.getElementById('ttrack').innerHTML=TESTS.map(t=>`
-    <div class="test-card card" style="padding:24px">
-      <div style="display:flex;gap:2px;margin-bottom:12px">${'★★★★★'.split('').map(_=>`<span style="color:#eab308;font-size:14px">★</span>`).join('')}</div>
-      <p style="font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:18px">"${t.t}"</p>
-      <div style="display:flex;align-items:center;gap:10px">
-        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,59,48,0.15);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:15px;flex-shrink:0">${t.n[0]}</div>
-        <div><p style="font-size:14px;font-weight:700">${t.n}</p><p style="font-size:12px;color:var(--text-dim)">${t.r}</p></div>
+  const track=document.getElementById('ttrack');
+  track.innerHTML=TESTS.map(t=>`
+    <div class="test-card card">
+      <div class="test-inner">
+        <div style="display:flex;gap:2px;margin-bottom:12px">${[1,2,3,4,5].map(_=>`<span style="color:#eab308;font-size:14px">★</span>`).join('')}</div>
+        <p style="font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:18px">"${t.t}"</p>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,59,48,0.15);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:15px;flex-shrink:0">${t.n[0]}</div>
+          <div><p style="font-size:14px;font-weight:700">${t.n}</p><p style="font-size:12px;color:var(--text-dim)">${t.r}</p></div>
+        </div>
       </div>
     </div>
   `).join('');
-  renderDots();
+  // Kenglikni DOM yuklanganidan keyin belgilaymiz
+  setTimeout(()=>{
+    setCardWidths();
+    renderDots();
+    slideT(0);
+  },50);
+}
+
+function getSliderWidth(){
+  // Slider container kengligi — sec-inner padding hisobga olgan holda
+  const inner=document.querySelector('.sec-inner');
+  if(!inner)return window.innerWidth-40;
+  return inner.getBoundingClientRect().width;
+}
+
+function setCardWidths(){
+  const w=getSliderWidth();
+  // Mobilda bir karta to'liq kenglik, desktopda max 360px
+  const cardW=Math.min(360,w);
+  document.querySelectorAll('.test-card').forEach(c=>{
+    c.style.minWidth=cardW+'px';
+    c.style.maxWidth=cardW+'px';
+  });
 }
 
 function renderDots(){
   document.getElementById('tdots').innerHTML=TESTS.map((_,i)=>`
-    <button onclick="slideT(${i})" style="width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all 0.2s;padding:0;background:${i===tIdx?'var(--accent)':'var(--glass-border)'};transform:scale(${i===tIdx?1.3:1})"></button>
+    <button onclick="slideT(${i})" style="width:${i===tIdx?20:8}px;height:8px;border-radius:9999px;border:none;cursor:pointer;transition:all 0.25s;padding:0;background:${i===tIdx?'var(--accent)':'var(--glass-border)'};"></button>
   `).join('');
 }
 
-function getCardWidth(){
-  const cards=document.querySelectorAll('.test-card');
-  if(!cards.length)return 376;
-  return cards[0].getBoundingClientRect().width+16;
-}
+function getCardGap(){return 16}
 
 function slideT(i){
-  tIdx=i;
-  document.getElementById('ttrack').style.transform=`translateX(-${i*getCardWidth()}px)`;
+  tIdx=Math.max(0,Math.min(TESTS.length-1,i));
+  const cards=document.querySelectorAll('.test-card');
+  if(!cards.length)return;
+  const cardW=cards[0].getBoundingClientRect().width;
+  const offset=tIdx*(cardW+getCardGap());
+  document.getElementById('ttrack').style.transform=`translateX(-${offset}px)`;
   renderDots();
 }
 
-document.getElementById('tprev').addEventListener('click',()=>slideT(Math.max(0,tIdx-1)));
-document.getElementById('tnext').addEventListener('click',()=>slideT(Math.min(TESTS.length-1,tIdx+1)));
-window.addEventListener('resize',()=>{if(tIdx>0)slideT(tIdx)});
+document.getElementById('tprev').addEventListener('click',()=>slideT(tIdx-1));
+document.getElementById('tnext').addEventListener('click',()=>slideT(tIdx+1));
+
+// Resize bo'lganda kengliklarni qayta hisoblash
+window.addEventListener('resize',()=>{
+  setCardWidths();
+  // Joriy indeks uchun pozitsiyani yangilash
+  slideT(tIdx);
+});
 
 // BLOGS
 const BLOGS=[
@@ -1684,15 +1732,15 @@ document.getElementById('resume-btn').addEventListener('click',()=>{
   },800);
 });
 
-// ====== GAME ENGINE — PROGRESSIVE DIFFICULTY ======
+// ====== GAME ENGINE ======
 const GC=document.getElementById('game-canvas'),GX=GC.getContext('2d');
 let gameRunning=false,gScore=0,gLives=3,gTime=30,gCombo=1,gComboCount=0,gLevel=1;
 let gTargets=[],gParticles=[],gEffects=[],gAnimId=null,gTimer=null;
 let audioCtx=null;
-// Difficulty progression: starts easy, gets harder every 10 seconds
-let gDifficulty=1; // 1=easy, increases over time
-let gSpawnDelay=1800; // ms between spawns, starts slow
+let gDifficulty=1;
+let gSpawnDelay=1800;
 let gNextSpawn=null;
+let gElapsed=0;
 
 function initAudio(){if(!audioCtx)try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
 function beep(f,d=0.1,t='sine'){
@@ -1712,9 +1760,7 @@ function resizeGC(){
   GC.height=Math.min(460,Math.floor(window.innerHeight*.5));
 }
 
-// Difficulty calculation based on time elapsed
 function getDifficulty(elapsed){
-  // elapsed in seconds since game start
   if(elapsed<10)return{speed:0.4,radius:[15,26],spawnMs:1800,special:0.08};
   if(elapsed<20)return{speed:0.7,radius:[13,24],spawnMs:1300,special:0.1};
   if(elapsed<30)return{speed:1.0,radius:[12,22],spawnMs:1000,special:0.12};
@@ -1723,15 +1769,12 @@ function getDifficulty(elapsed){
   return{speed:2.2,radius:[9,16],spawnMs:400,special:0.18};
 }
 
-let gElapsed=0; // seconds elapsed
-
 class GT{
   constructor(special=false,diff){
     const minR=diff.radius[0],maxR=diff.radius[1];
     this.r=special?22:Math.random()*(maxR-minR)+minR;
     this.x=Math.random()*(GC.width-this.r*2-20)+this.r+10;
     this.y=Math.random()*(GC.height-this.r*2-20)+this.r+10;
-    // Life decreases based on difficulty — targets disappear faster at higher difficulty
     const baseLife=special?80:Math.random()*40+35;
     this.life=Math.max(25,baseLife-gDifficulty*4);
     this.max=this.life;
@@ -1800,7 +1843,6 @@ function updateUI(){
   document.getElementById('g-pow-lbl').textContent=gComboCount+'/5';
 }
 
-// Adaptive spawning — called recursively with dynamic delay
 function scheduleSpawn(){
   if(!gameRunning)return;
   const diff=getDifficulty(gElapsed);
@@ -1825,13 +1867,10 @@ function gameLoop(){
   GX.lineWidth=1;
   for(let x=0;x<GC.width;x+=48){GX.beginPath();GX.moveTo(x,0);GX.lineTo(x,GC.height);GX.stroke()}
   for(let y=0;y<GC.height;y+=48){GX.beginPath();GX.moveTo(0,y);GX.lineTo(GC.width,y);GX.stroke()}
-  // Level indicator
   GX.fillStyle=theme==='dark'?'rgba(255,255,255,0.025)':'rgba(0,0,0,0.04)';
   GX.font=`bold ${Math.min(90,GC.width/5)}px Sora,sans-serif`;GX.textAlign='center';GX.textBaseline='middle';
   GX.fillText(gScore,GC.width/2,GC.height/2+14);
-  // Level up flash
   if(gLevel>1){
-    GX.fillStyle=`rgba(52,199,89,0.04)`;
     GX.font=`bold 13px Sora,sans-serif`;
     GX.fillStyle=theme==='dark'?'rgba(52,199,89,0.3)':'rgba(52,199,89,0.5)';
     GX.fillText(`DARAJA ${gLevel}`,GC.width-70,24);
@@ -1883,14 +1922,11 @@ function startGame(){
   document.getElementById('gbtn-stop').style.display='';
   updateUI();
   clearInterval(gTimer);clearTimeout(gNextSpawn);
-
   gTimer=setInterval(()=>{
     gTime--;gElapsed++;
-    // Update level every 10 seconds
     const newLevel=Math.floor(gElapsed/10)+1;
     if(newLevel>gLevel){
       gLevel=newLevel;
-      // Flash level up on canvas
       gEffects.push(new ScoreEffect(GC.width/2,GC.height/2-60,`🔥 DARAJA ${gLevel}!`,'#34c759'));
       beep(900,.15);
     }
@@ -1898,7 +1934,6 @@ function startGame(){
     updateUI();
     if(gTime<=0)endGame();
   },1000);
-
   scheduleSpawn();
   gameLoop();
 }

@@ -13,7 +13,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ===== CSS VARIABLES ===== */
 :root {
   --accent: #ff3b30;
   --accent2: #ff9500;
@@ -58,7 +57,6 @@
   --shadow-nav: 0 4px 24px rgba(0,0,0,0.15), 0 1px 0 rgba(255,255,255,0.9) inset;
 }
 
-/* ===== RESET & BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
 body{
@@ -75,7 +73,6 @@ body{
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
 
-/* ===== BACKGROUND MESH ===== */
 .bg-mesh{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
@@ -89,7 +86,6 @@ body{
     radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,149,0,0.04) 0%, transparent 60%);
 }
 
-/* ===== LOADER ===== */
 #loader{
   position:fixed;inset:0;z-index:9999;
   background:#000;
@@ -116,10 +112,8 @@ body{
 }
 .loader-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.2s ease;border-radius:2px}
 
-/* ===== PARTICLES ===== */
 #particles-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.6}
 
-/* ===== CUSTOM CURSOR ===== */
 .c-dot,.c-ring{position:fixed;pointer-events:none;z-index:9990;border-radius:50%;transform:translate(-50%,-50%)}
 .c-dot{width:6px;height:6px;background:var(--accent);transition:transform 0.1s,opacity 0.2s}
 .c-ring{width:36px;height:36px;border:1.5px solid rgba(255,59,48,0.5);transition:width 0.3s,height 0.3s,border-color 0.3s,background 0.3s}
@@ -127,7 +121,6 @@ body{
 .c-ring.click{width:28px;height:28px}
 @media(pointer:coarse){.c-dot,.c-ring{display:none!important}}
 
-/* ===== GLASS BASE ===== */
 .g{
   background:var(--glass);
   backdrop-filter:var(--blur-md);
@@ -147,7 +140,7 @@ body{
   border:1px solid var(--glass-border-strong);
 }
 
-/* ===== NAVIGATION ===== */
+/* ===== NAV ===== */
 #nav{
   position:fixed;top:12px;left:50%;
   transform:translateX(-50%);
@@ -176,8 +169,7 @@ body{
 }
 .nav-btn:hover{color:var(--text);background:var(--glass-md)}
 
-/* ===== LANGUAGE DROPDOWN ===== */
-/* FIX 1: lang-trigger is separate from nav-btn — no duplicate sizing conflict */
+/* ===== LANG ===== */
 .lang-wrap{position:relative}
 .lang-trigger{
   display:flex;align-items:center;gap:5px;
@@ -212,23 +204,38 @@ body{
 .lang-opt.cur{color:var(--accent)}
 .lang-sep{height:1px;background:var(--glass-border);margin:3px 0}
 
-/* ===== MOBILE MENU ===== */
+/* ===== MOBILE MENU — CHAP TOMONDA ===== */
 #mmenu{
-  position:fixed;inset:0;z-index:180;
+  position:fixed;
+  top:0;left:0;bottom:0;
+  width:min(320px, 85vw);
+  z-index:180;
   display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
+  align-items:flex-start;justify-content:center;
   gap:4px;
-  transform:translateY(-100%);
-  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1),opacity 0.4s;
-  opacity:0;pointer-events:none;
+  padding:80px 24px 40px;
+  transform:translateX(-100%);
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:4px 0 40px rgba(0,0,0,0.5);
 }
-#mmenu.open{transform:translateY(0);opacity:1;pointer-events:all}
+#mmenu.open{transform:translateX(0)}
+/* Overlay for mobile menu */
+#mmenu-overlay{
+  position:fixed;inset:0;z-index:175;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s;
+}
+#mmenu-overlay.open{opacity:1;pointer-events:all}
 .mm-link{
-  font-size:28px;font-weight:700;letter-spacing:-0.03em;
+  font-size:22px;font-weight:700;letter-spacing:-0.03em;
   color:var(--text);text-decoration:none;
-  padding:10px 24px;border-radius:var(--radius-md);
+  padding:10px 14px;border-radius:var(--radius-md);
   transition:all 0.2s;
   display:flex;align-items:center;gap:14px;
+  width:100%;
 }
 .mm-link:hover,.mm-link:active{color:var(--accent);background:rgba(255,59,48,0.08)}
 .mm-link-num{font-size:12px;font-weight:500;color:var(--text-dim);width:22px}
@@ -241,7 +248,7 @@ body{
 }
 .mm-close:hover{color:var(--accent);border-color:rgba(255,59,48,0.3)}
 
-/* ===== CMD PALETTE ===== */
+/* ===== CMD ===== */
 #cmd{
   position:fixed;inset:0;z-index:300;
   display:flex;align-items:flex-start;justify-content:center;
@@ -307,7 +314,7 @@ body{
 .hero-btns{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
 .hero-socials{display:flex;gap:8px}
 
-/* ===== AVATAR CARD ===== */
+/* ===== AVATAR ===== */
 .avatar-wrap{
   display:flex;justify-content:center;align-items:center;
   position:relative;
@@ -383,7 +390,7 @@ body{
 .btn-s:active{transform:translateY(0)}
 .btn-sm{padding:9px 16px;font-size:12.5px}
 
-/* ===== SOCIAL LINK ===== */
+/* ===== SOCIAL ===== */
 .social{
   width:38px;height:38px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -516,7 +523,7 @@ section{position:relative;z-index:1}
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* ===== BACK TO TOP ===== */
+/* ===== BTT ===== */
 #btt{
   position:fixed;bottom:88px;right:16px;z-index:100;
   width:44px;height:44px;border-radius:50%;
@@ -585,7 +592,7 @@ section{position:relative;z-index:1}
 }
 .power-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 0.3s}
 
-/* ===== PROJECT CARD ===== */
+/* ===== PROJ CARD ===== */
 .proj-card{
   border-radius:var(--radius-lg);overflow:hidden;
   transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
@@ -614,39 +621,40 @@ section{position:relative;z-index:1}
   padding:28px;position:relative;
 }
 
-/* ===== TESTIMONIALS — FIX 2 & 3 ===== */
-/* 
-  FIX 2: test-card overrides .card:hover so it doesn't translateY off-screen on hover
-  FIX 3: slider container uses overflow:hidden clip but cards are fully visible
-*/
+/* ===== TESTIMONIALS — MOBIL UCHUN TO'LIQ ===== */
 .testimonials-outer{
-  /* overflow visible so cards don't get clipped on hover */
   overflow:hidden;
   padding:8px 4px 16px;
+  /* Clip qilmaymiz — scrollga yo'l beramiz */
 }
 .test-track{
   display:flex;
   gap:16px;
   transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
-  /* No overflow:hidden here — parent handles clip */
+  will-change:transform;
 }
 .test-card{
+  /* Mobilda ekran kengligiga qarab o'lcham olsin */
   min-width:min(360px, calc(100vw - 48px));
+  max-width:min(360px, calc(100vw - 48px));
   flex-shrink:0;
-  /* Override global .card:hover translateY — testimonial cards should not fly off */
+  /* Testimonial kartalar uchavib ketmasin */
   transform:none !important;
+  transition:border-color 0.3s, box-shadow 0.3s !important;
 }
-/* Allow only subtle hover effect on testimonial cards */
 .test-card.card:hover{
-  transform:scale(1.01) !important;
+  transform:none !important;
   border-color:var(--glass-border-strong);
-  box-shadow:0 12px 40px rgba(0,0,0,0.35),0 1px 0 rgba(255,255,255,0.08) inset;
+  box-shadow:0 12px 40px rgba(0,0,0,0.3),0 1px 0 rgba(255,255,255,0.08) inset;
 }
 
-/* Mobile testimonials */
 @media(max-width:480px){
   .test-card{
-    min-width:calc(100vw - 40px);
+    min-width:calc(100vw - 40px) !important;
+    max-width:calc(100vw - 40px) !important;
+  }
+  .test-card .test-inner{
+    padding:18px !important;
   }
 }
 
@@ -663,7 +671,6 @@ section{position:relative;z-index:1}
 .rev.in{opacity:1;transform:translateY(0)}
 .d1{transition-delay:0.06s}.d2{transition-delay:0.13s}.d3{transition-delay:0.2s}.d4{transition-delay:0.27s}.d5{transition-delay:0.34s}
 
-/* ===== FOOTER ===== */
 footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 
 /* ===== RESPONSIVE ===== */
@@ -703,17 +710,14 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 }
 .srv-card:hover::before{left:100%}
 
-/* ===== BLOG ===== */
 .blog-card{border-radius:var(--radius-lg);overflow:hidden;cursor:pointer}
 .blog-card:hover{transform:translateY(-6px)}
 </style>
 </head>
 <body>
 
-<!-- BG MESH -->
 <div class="bg-mesh"></div>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="loader-ring"></div>
   <div class="loader-logo">Artur<span>.</span>SH</div>
@@ -721,18 +725,12 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   <div class="loader-progress"><div class="loader-fill" id="loader-fill"></div></div>
 </div>
 
-<!-- CURSOR -->
 <div class="c-dot" id="cdot"></div>
 <div class="c-ring" id="cring"></div>
-
-<!-- PARTICLES -->
 <canvas id="particles-canvas"></canvas>
-
-<!-- TOAST -->
 <div class="toast g-strong" id="toast"></div>
 
-<!-- ========== NAVIGATION ========== -->
-<!-- FIX 1: lang-trigger button no longer has "nav-btn" class — prevents double-sizing & duplicate text -->
+<!-- NAV -->
 <nav id="nav" class="g-strong">
   <div class="nav-links-md" style="display:flex;align-items:center;gap:2px">
     <a href="#hero" class="nav-link" data-n="nav.home">Bosh sahifa</a>
@@ -743,7 +741,6 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
     <a href="#contact" class="nav-link" data-n="nav.contact">Aloqa</a>
   </div>
   <div style="display:flex;align-items:center;gap:3px;margin-left:6px">
-    <!-- LANG DROPDOWN — only "lang-trigger" class, not "lang-trigger nav-btn" -->
     <div class="lang-wrap">
       <button class="lang-trigger" id="lang-btn">
         <span id="lang-code" style="font-size:11px;font-weight:700;letter-spacing:0.05em">UZ</span>
@@ -757,37 +754,45 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
         <button class="lang-opt" data-l="ru"><span style="font-size:16px">🇷🇺</span> Русский</button>
       </div>
     </div>
-    <!-- THEME -->
     <button class="nav-btn" id="theme-btn" title="Mavzu">
       <svg id="ico-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg id="ico-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
-    <!-- SEARCH -->
     <button class="nav-btn" id="cmd-btn" title="Qidirish (Ctrl+K)">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </button>
-    <!-- MOBILE BURGER -->
     <button class="nav-btn nav-mobile-btn" id="mb-btn">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- MOBILE MENU OVERLAY -->
+<div id="mmenu-overlay" onclick="closeMobileMenu()"></div>
+
+<!-- MOBILE MENU — CHAP TOMONDA -->
 <div id="mmenu" class="g-ultra">
-  <button class="mm-close" id="mm-close">
+  <button class="mm-close" id="mm-close" onclick="closeMobileMenu()">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
-  <a href="#hero" class="mm-link"><span class="mm-link-num">01</span><span data-n="nav.home">Bosh sahifa</span></a>
-  <a href="#about" class="mm-link"><span class="mm-link-num">02</span><span data-n="nav.about">Men haqimda</span></a>
-  <a href="#experience" class="mm-link"><span class="mm-link-num">03</span><span data-n="nav.experience">Tajriba</span></a>
-  <a href="#skills" class="mm-link"><span class="mm-link-num">04</span><span data-n="nav.skills">Ko'nikmalar</span></a>
-  <a href="#projects" class="mm-link"><span class="mm-link-num">05</span><span data-n="nav.projects">Loyihalar</span></a>
-  <a href="#game" class="mm-link"><span class="mm-link-num">06</span><span data-n="nav.game">O'yin</span></a>
-  <a href="#contact" class="mm-link"><span class="mm-link-num">07</span><span data-n="nav.contact">Aloqa</span></a>
+  <!-- Logo -->
+  <div style="font-size:20px;font-weight:800;letter-spacing:-0.03em;margin-bottom:24px;color:var(--text)">Artur<span style="color:var(--accent)">.</span>SH</div>
+  <a href="#hero" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">01</span><span data-n="nav.home">Bosh sahifa</span></a>
+  <a href="#about" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">02</span><span data-n="nav.about">Men haqimda</span></a>
+  <a href="#experience" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">03</span><span data-n="nav.experience">Tajriba</span></a>
+  <a href="#skills" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">04</span><span data-n="nav.skills">Ko'nikmalar</span></a>
+  <a href="#projects" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">05</span><span data-n="nav.projects">Loyihalar</span></a>
+  <a href="#game" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">06</span><span data-n="nav.game">O'yin</span></a>
+  <a href="#contact" class="mm-link" onclick="closeMobileMenu()"><span class="mm-link-num">07</span><span data-n="nav.contact">Aloqa</span></a>
+  <!-- Social links pastda -->
+  <div style="margin-top:auto;padding-top:24px;display:flex;gap:8px">
+    <a href="https://github.com/shodiyevartur1-pixel" target="_blank" class="social"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+    <a href="https://t.me/shdyvv" target="_blank" class="social"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></a>
+    <a href="mailto:shodiyevartur1@gmail.com" class="social"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+  </div>
 </div>
 
-<!-- COMMAND PALETTE -->
+<!-- CMD PALETTE -->
 <div id="cmd">
   <div id="cmd-overlay" onclick="closeCmd()"></div>
   <div id="cmd-box" class="g-ultra">
@@ -810,7 +815,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </div>
 
-<!-- ========== HERO ========== -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-grid">
@@ -850,7 +855,6 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
           </a>
         </div>
       </div>
-      <!-- AVATAR -->
       <div class="avatar-wrap">
         <div style="position:relative">
           <div class="avatar-card g-strong">
@@ -878,7 +882,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== ABOUT ========== -->
+<!-- ABOUT -->
 <section id="about" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:56px">
@@ -888,40 +892,28 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
     </div>
     <div class="about-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
       <div class="rev d2">
-        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted);margin-bottom:18px" data-n="about.p1">
-          Men Artur Shodiyev, Qashqadaryo viloyati, Qarshi tumanidan bo'lgan Full Stack Dasturchiman. 1.5 yillik professional tajribaga egaman va zamonaviy, masshtablash mumkin bo'lgan veb-ilovalar yaratishga ixtisoslashganman.
-        </p>
-        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted);margin-bottom:18px" data-n="about.p2">
-          Ajoyib dasturiy ta'minot go'zal dizayn, toza kod va o'ylangan arxitekturaning kesishmasida tug'ilishiga ishonaman.
-        </p>
-        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted)" data-n="about.p3">
-          Mening viziyam — veb-taraqqiyot kelajagini shakllantiruvchi yetakchi muhandis bo'lish.
-        </p>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted);margin-bottom:18px" data-n="about.p1">Men Artur Shodiyev, Qashqadaryo viloyati, Qarshi tumanidan bo'lgan Full Stack Dasturchiman. 1.5 yillik professional tajribaga egaman va zamonaviy, masshtablash mumkin bo'lgan veb-ilovalar yaratishga ixtisoslashganman.</p>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted);margin-bottom:18px" data-n="about.p2">Ajoyib dasturiy ta'minot go'zal dizayn, toza kod va o'ylangan arxitekturaning kesishmasida tug'ilishiga ishonaman.</p>
+        <p style="font-size:16px;font-weight:300;line-height:1.8;color:var(--text-muted)" data-n="about.p3">Mening viziyam — veb-taraqqiyot kelajagini shakllantiruvchi yetakchi muhandis bo'lish.</p>
       </div>
       <div class="rev d3" style="display:flex;flex-direction:column;gap:14px">
         <div class="card" style="padding:20px">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
+            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
             <h3 style="font-size:15px;font-weight:700;color:var(--text)" data-n="about.mission">Vazifa</h3>
           </div>
           <p style="font-size:13px;color:var(--text-muted);line-height:1.65" data-n="about.missionDesc">Estetikani funksionallik bilan birlashtiruvchi ta'sirli raqamli yechimlar yaratish.</p>
         </div>
         <div class="card" style="padding:20px">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent2);flex-shrink:0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
+            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent2);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
             <h3 style="font-size:15px;font-weight:700;color:var(--text)" data-n="about.vision">Viziya</h3>
           </div>
           <p style="font-size:13px;color:var(--text-muted);line-height:1.65" data-n="about.visionDesc">Veb-innovatsiyalarning yetakchi o'qida bo'lish, millionlab foydalanuvchilarga imkon beruvchi platformalar yaratish.</p>
         </div>
         <div class="card" style="padding:20px">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(52,199,89,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent3);flex-shrink:0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
+            <div style="width:40px;height:40px;border-radius:var(--radius-sm);background:rgba(52,199,89,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent3);flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
             <h3 style="font-size:15px;font-weight:700;color:var(--text)" data-n="about.values">Qadriyatlar</h3>
           </div>
           <p style="font-size:13px;color:var(--text-muted);line-height:1.65" data-n="about.valuesDesc">Sifat miqdordan ustun. Uzluksiz o'rganish. Toza kod. Foydalanuvchi birinchi.</p>
@@ -931,7 +923,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== EXPERIENCE ========== -->
+<!-- EXPERIENCE -->
 <section id="experience" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:56px">
@@ -985,7 +977,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== SKILLS ========== -->
+<!-- SKILLS -->
 <section id="skills" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:56px">
@@ -1024,7 +1016,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== PROJECTS ========== -->
+<!-- PROJECTS -->
 <section id="projects" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:40px">
@@ -1047,7 +1039,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== STATS ========== -->
+<!-- STATS -->
 <section id="stats" class="sec-pad">
   <div class="sec-inner">
     <div class="stats-grid" style="display:grid;gap:14px">
@@ -1059,7 +1051,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== ACHIEVEMENTS ========== -->
+<!-- ACHIEVEMENTS -->
 <section id="achievements" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:48px">
@@ -1075,7 +1067,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== SERVICES ========== -->
+<!-- SERVICES -->
 <section id="services" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:48px">
@@ -1083,15 +1075,15 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
       <h2 class="sec-title rev d1">Nima Taklif Qilaman</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px">
-      <div class="card srv-card card-red-top rev"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Veb-Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">Konsepsiyadan joylashtirishgacha to'liq veb-ilova yaratish. Zamonaviy stack va optimallashtirilgan performans.</p></div>
-      <div class="card srv-card card-red-top rev d1"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent2);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Frontend Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">React, Next.js va TypeScript bilan piksel-mukammal interfeyslar va silliq animatsiyalar.</p></div>
-      <div class="card srv-card card-red-top rev d2"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(52,199,89,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent3);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Backend Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">Node.js va Express bilan mustahkam API-lar, ma'lumotlar bazasi dizayni va autentifikatsiya.</p></div>
-      <div class="card srv-card card-red-top rev d3"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Full Stack Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">MVP'dan ishlab chiqarishga tayyor ilovalargacha to'liq mahsulot yaratish.</p></div>
+      <div class="card srv-card card-red-top rev"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Veb-Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">Konsepsiyadan joylashtirishgacha to'liq veb-ilova yaratish.</p></div>
+      <div class="card srv-card card-red-top rev d1"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,149,0,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent2);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Frontend Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">React, Next.js va TypeScript bilan piksel-mukammal interfeyslar.</p></div>
+      <div class="card srv-card card-red-top rev d2"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(52,199,89,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent3);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Backend Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">Node.js va Express bilan mustahkam API-lar va autentifikatsiya.</p></div>
+      <div class="card srv-card card-red-top rev d3"><div style="width:50px;height:50px;border-radius:var(--radius-sm);background:rgba(255,59,48,0.1);display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><h3 style="font-size:17px;font-weight:700;margin-bottom:9px">Full Stack Taraqqiyot</h3><p style="font-size:13.5px;color:var(--text-muted);line-height:1.65">MVP'dan ishlab chiqarishga tayyor ilovalargacha to'liq mahsulot.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ========== GAME ========== -->
+<!-- GAME -->
 <section id="game" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:40px">
@@ -1126,6 +1118,10 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
               <span style="font-size:11px;color:var(--text-dim)">Combo</span>
               <span class="hud-val" id="g-combo" style="color:var(--accent2)">x1</span>
             </div>
+            <div class="hud-stat g" style="border-radius:var(--radius-pill)">
+              <span style="font-size:11px;color:var(--accent3)">Daraja</span>
+              <span class="hud-val" id="g-level" style="color:var(--accent3)">1</span>
+            </div>
           </div>
         </div>
         <div style="margin-top:8px">
@@ -1148,10 +1144,11 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
           <p style="font-size:12px;font-weight:700;margin-bottom:7px">Qanday o'ynash</p>
           <ul style="font-size:12px;color:var(--text-muted);line-height:1.9">
             <li>• Neon nishonlarni bosing</li>
-            <li>• Ketma-ket urishda combo ↑</li>
+            <li>• Ketma-ket combo ↑</li>
             <li>• Combo x2/x3 = ko'proq ball</li>
             <li>• O'tkazib yuborilsa hayot -1</li>
             <li>• 💥 Maxsus nishon = +50 ball</li>
+            <li>• ⏱ Vaqt o'tgach qiyinlashadi!</li>
           </ul>
         </div>
       </div>
@@ -1160,8 +1157,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
 </section>
 <style>@media(max-width:768px){.game-grid{grid-template-columns:1fr!important}}</style>
 
-<!-- ========== TESTIMONIALS ========== -->
-<!-- FIX 2 & 3: proper container class + mobile sizing -->
+<!-- TESTIMONIALS -->
 <section id="testimonials" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:48px">
@@ -1183,7 +1179,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== BLOG ========== -->
+<!-- BLOG -->
 <section id="blog" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:40px">
@@ -1202,7 +1198,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== CONTACT ========== -->
+<!-- CONTACT -->
 <section id="contact" class="sec-pad">
   <div class="sec-inner">
     <div style="text-align:center;margin-bottom:48px">
@@ -1261,7 +1257,7 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   </div>
 </section>
 
-<!-- ========== FOOTER ========== -->
+<!-- FOOTER -->
 <footer style="padding:56px 0 88px">
   <div class="sec-inner">
     <div class="footer-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-bottom:36px">
@@ -1304,14 +1300,13 @@ footer{border-top:1px solid var(--glass-border);position:relative;z-index:1}
   <button class="dock-i g" id="dock-theme-btn"><svg id="d-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg id="d-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span class="dock-tip g-strong">Mavzu</span></button>
 </div>
 
-<!-- BACK TO TOP -->
+<!-- BTT -->
 <button id="btt" class="g-strong" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
 </button>
 
-<!-- ==================== SCRIPT ==================== -->
 <script>
-// ====== TRANSLATIONS ======
+// TRANSLATIONS
 const TR = {
   uz:{
     'nav.home':'Bosh sahifa','nav.about':'Men haqimda','nav.experience':'Tajriba',
@@ -1371,16 +1366,12 @@ const TR = {
     'toast.go':'Игра окончена! Счёт: ','toast.hs':'Новый рекорд! '
   }
 };
-const LANGMETA = {
-  uz:{flag:'🇺🇿',code:'UZ'},
-  en:{flag:'🇬🇧',code:'EN'},
-  ru:{flag:'🇷🇺',code:'RU'}
-};
+const LANGMETA = {uz:{flag:'🇺🇿',code:'UZ'},en:{flag:'🇬🇧',code:'EN'},ru:{flag:'🇷🇺',code:'RU'}};
 
 let lang = localStorage.getItem('lang')||'uz';
 let theme = localStorage.getItem('theme')||'dark';
 
-// ====== THEME ======
+// THEME
 function setTheme(t){
   theme=t;localStorage.setItem('theme',t);
   document.documentElement.setAttribute('data-theme',t);
@@ -1392,16 +1383,12 @@ function toggleTheme(){setTheme(theme==='dark'?'light':'dark')}
 document.getElementById('theme-btn').addEventListener('click',toggleTheme);
 document.getElementById('dock-theme-btn').addEventListener('click',toggleTheme);
 
-// ====== LANGUAGE ======
+// LANGUAGE
 function setLang(l){
   lang=l;localStorage.setItem('lang',l);
   const m=LANGMETA[l];
-  // Update only the code span (no flag here — clean single display)
   document.getElementById('lang-code').textContent=m.code;
-  // Mark current
-  document.querySelectorAll('.lang-opt').forEach(b=>{
-    b.classList.toggle('cur',b.dataset.l===l);
-  });
+  document.querySelectorAll('.lang-opt').forEach(b=>{b.classList.toggle('cur',b.dataset.l===l)});
   const t=TR[l];
   document.querySelectorAll('[data-n]').forEach(el=>{
     const k=el.getAttribute('data-n');
@@ -1409,8 +1396,6 @@ function setLang(l){
   });
   closeLangDrop();
 }
-
-// Lang dropdown
 const langBtn=document.getElementById('lang-btn');
 const langDrop=document.getElementById('lang-drop');
 const langChev=document.getElementById('lang-chevron');
@@ -1418,36 +1403,37 @@ let langOpen=false;
 function openLangDrop(){langOpen=true;langDrop.classList.add('open');langChev.style.transform='rotate(180deg)'}
 function closeLangDrop(){langOpen=false;langDrop.classList.remove('open');langChev.style.transform='rotate(0)'}
 langBtn.addEventListener('click',e=>{e.stopPropagation();langOpen?closeLangDrop():openLangDrop()});
-document.querySelectorAll('.lang-opt').forEach(btn=>{
-  btn.addEventListener('click',()=>setLang(btn.dataset.l));
-});
+document.querySelectorAll('.lang-opt').forEach(btn=>{btn.addEventListener('click',()=>setLang(btn.dataset.l))});
 document.addEventListener('click',e=>{if(langOpen&&!langBtn.closest('.lang-wrap').contains(e.target))closeLangDrop()});
 
-// ====== SCROLL UTILITY ======
 function ss(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'})}
 
-// ====== NAVBAR ======
+// NAVBAR SCROLL
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('compact',window.scrollY>50);
   const btt=document.getElementById('btt');
-  if(window.scrollY>500){btt.classList.add('vis')}else{btt.classList.remove('vis')}
+  btt.classList.toggle('vis',window.scrollY>500);
   const secs=['hero','about','experience','skills','projects','stats','achievements','services','game','testimonials','blog','contact'];
   let cur='hero';
-  secs.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el&&window.scrollY>=el.offsetTop-200)cur=id;
-  });
-  document.querySelectorAll('.nav-link').forEach(a=>{
-    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
-  });
+  secs.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-200)cur=id});
+  document.querySelectorAll('.nav-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)});
 });
 
-// ====== MOBILE MENU ======
-document.getElementById('mb-btn').addEventListener('click',()=>{document.getElementById('mmenu').classList.add('open')});
-document.getElementById('mm-close').addEventListener('click',()=>{document.getElementById('mmenu').classList.remove('open')});
-document.querySelectorAll('.mm-link').forEach(a=>a.addEventListener('click',()=>{document.getElementById('mmenu').classList.remove('open')}));
+// MOBILE MENU — CHAP TOMONDA
+function openMobileMenu(){
+  document.getElementById('mmenu').classList.add('open');
+  document.getElementById('mmenu-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMobileMenu(){
+  document.getElementById('mmenu').classList.remove('open');
+  document.getElementById('mmenu-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('mb-btn').addEventListener('click',openMobileMenu);
+document.getElementById('mm-close').addEventListener('click',closeMobileMenu);
 
-// ====== CURSOR ======
+// CURSOR
 let mx=0,my=0,rx=0,ry=0;
 const cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px'});
@@ -1458,7 +1444,7 @@ document.querySelectorAll('a,button,.card,.skill-card,.proj-card').forEach(el=>{
   el.addEventListener('mouseleave',()=>cring.classList.remove('hover'));
 });
 
-// ====== PARTICLES ======
+// PARTICLES
 const pc=document.getElementById('particles-canvas'),px=pc.getContext('2d');
 function resizePC(){pc.width=window.innerWidth;pc.height=window.innerHeight}
 resizePC();window.addEventListener('resize',resizePC);
@@ -1471,13 +1457,13 @@ class P{
 const pts=Array.from({length:55},()=>new P());
 (function ap(){px.clearRect(0,0,pc.width,pc.height);pts.forEach(p=>{p.u();p.d()});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){px.beginPath();px.strokeStyle=`rgba(255,59,48,${.06*(1-d/100)})`;px.lineWidth=.5;px.moveTo(pts[i].x,pts[i].y);px.lineTo(pts[j].x,pts[j].y);px.stroke()}}requestAnimationFrame(ap)})();
 
-// ====== REVEAL ======
+// REVEAL
 (function(){
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
 })();
 
-// ====== COUNTERS ======
+// COUNTERS
 (function(){
   const obs=new IntersectionObserver(es=>{es.forEach(e=>{
     if(!e.isIntersecting)return;
@@ -1489,7 +1475,7 @@ const pts=Array.from({length:55},()=>new P());
   document.querySelectorAll('.stat-n').forEach(el=>obs.observe(el));
 })();
 
-// ====== TOAST ======
+// TOAST
 function toast(msg,type='info'){
   const el=document.getElementById('toast');
   el.textContent=msg;
@@ -1499,7 +1485,7 @@ function toast(msg,type='info'){
   setTimeout(()=>el.classList.remove('show'),3200);
 }
 
-// ====== COMMAND PALETTE ======
+// CMD PALETTE
 const CMDS=[
   {ic:'🏠',uz:'Bosh sahifa',en:'Home',ru:'Главная',fn:()=>ss('hero')},
   {ic:'👤',uz:'Men haqimda',en:'About',ru:'Обо мне',fn:()=>ss('about')},
@@ -1532,10 +1518,10 @@ document.getElementById('cmd-btn').addEventListener('click',openCmd);
 document.getElementById('cmd-inp').addEventListener('input',e=>renderCmd(e.target.value));
 document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openCmd()}
-  if(e.key==='Escape'){closeCmd();closeLangDrop();document.getElementById('mmenu').classList.remove('open')}
+  if(e.key==='Escape'){closeCmd();closeLangDrop();closeMobileMenu()}
 });
 
-// ====== PROJECTS ======
+// PROJECTS
 const PROJS=[
   {id:1,t:'Elektron Savdo Platformasi',d:"To'lov integratsiyasi, admin paneli va real-time inventar boshqaruvi bilan to'liq elektron savdo platformasi.",cat:'fullstack',tech:['Next.js','Node.js','PostgreSQL','Stripe'],img:'https://picsum.photos/seed/ecom1/600/380',gh:'https://github.com/shodiyevartur1-pixel',live:'#'},
   {id:2,t:'Vazifa Boshqaruv Ilovasi',d:"Real-time yangilanishlar va drag-and-drop taxtalari bilan hamkorlik vazifa menejeri.",cat:'fullstack',tech:['React','Express','MongoDB','Socket.io'],img:'https://picsum.photos/seed/task2/600/380',gh:'https://github.com/shodiyevartur1-pixel',live:'#'},
@@ -1592,7 +1578,7 @@ function openModal(id){
 function closeModal(){document.getElementById('proj-modal').classList.remove('open')}
 document.getElementById('proj-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
 
-// ====== TESTIMONIALS ======
+// TESTIMONIALS
 const TESTS=[
   {n:'Alisher Karimov',r:'CEO, TechHub',t:"Artur ajoyib elektron savdo platformasini yetkazib berdi. Uning kod sifati va e'tiborlari ajoyib."},
   {n:'Dilnoza Rahimova',r:'Mahsulot Menejeri',t:'Artur bilan ishlash zavq edi. U loyihaning texnik va biznes tomonlarini yaxshi tushunadi.'},
@@ -1621,25 +1607,23 @@ function renderDots(){
   `).join('');
 }
 
+function getCardWidth(){
+  const cards=document.querySelectorAll('.test-card');
+  if(!cards.length)return 376;
+  return cards[0].getBoundingClientRect().width+16;
+}
+
 function slideT(i){
   tIdx=i;
-  // Calculate card width dynamically
-  const cards=document.querySelectorAll('.test-card');
-  if(!cards.length)return;
-  const w=cards[0].getBoundingClientRect().width+16;
-  document.getElementById('ttrack').style.transform=`translateX(-${i*w}px)`;
+  document.getElementById('ttrack').style.transform=`translateX(-${i*getCardWidth()}px)`;
   renderDots();
 }
 
 document.getElementById('tprev').addEventListener('click',()=>slideT(Math.max(0,tIdx-1)));
 document.getElementById('tnext').addEventListener('click',()=>slideT(Math.min(TESTS.length-1,tIdx+1)));
+window.addEventListener('resize',()=>{if(tIdx>0)slideT(tIdx)});
 
-// Recalculate on resize
-window.addEventListener('resize',()=>{
-  if(tIdx>0)slideT(tIdx);
-});
-
-// ====== BLOGS ======
+// BLOGS
 const BLOGS=[
   {id:1,t:'React Server Components',e:'RSC arxitekturasiga chuqur kirish.',cat:'tech',d:'15 Yan 2025',r:'8 daq',img:'https://picsum.photos/seed/b001/600/380'},
   {id:2,t:'Junior dan Mid-Level gacha',e:"Birinchi ikki yilda kasbini oshirish yo'l xaritasi.",cat:'career',d:'3 Feb 2025',r:'6 daq',img:'https://picsum.photos/seed/b002/600/380'},
@@ -1669,7 +1653,7 @@ document.querySelectorAll('#bfilt .badge').forEach(b=>b.addEventListener('click'
   b.classList.add('on');bf=b.dataset.bf;renderBlogs();
 }));
 
-// ====== CONTACT FORM ======
+// CONTACT FORM
 document.getElementById('cform').addEventListener('submit',function(e){
   e.preventDefault();
   if(this.honeypot.value)return;
@@ -1691,7 +1675,7 @@ document.getElementById('cform').addEventListener('submit',function(e){
   },1400);
 });
 
-// ====== RESUME ======
+// RESUME
 document.getElementById('resume-btn').addEventListener('click',()=>{
   toast("CV yuklanmoqda...",'info');
   setTimeout(()=>{
@@ -1700,11 +1684,15 @@ document.getElementById('resume-btn').addEventListener('click',()=>{
   },800);
 });
 
-// ====== GAME ENGINE ======
+// ====== GAME ENGINE — PROGRESSIVE DIFFICULTY ======
 const GC=document.getElementById('game-canvas'),GX=GC.getContext('2d');
-let gameRunning=false,gScore=0,gLives=3,gTime=30,gCombo=1,gComboCount=0;
+let gameRunning=false,gScore=0,gLives=3,gTime=30,gCombo=1,gComboCount=0,gLevel=1;
 let gTargets=[],gParticles=[],gEffects=[],gAnimId=null,gTimer=null;
 let audioCtx=null;
+// Difficulty progression: starts easy, gets harder every 10 seconds
+let gDifficulty=1; // 1=easy, increases over time
+let gSpawnDelay=1800; // ms between spawns, starts slow
+let gNextSpawn=null;
 
 function initAudio(){if(!audioCtx)try{audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
 function beep(f,d=0.1,t='sine'){
@@ -1724,19 +1712,36 @@ function resizeGC(){
   GC.height=Math.min(460,Math.floor(window.innerHeight*.5));
 }
 
+// Difficulty calculation based on time elapsed
+function getDifficulty(elapsed){
+  // elapsed in seconds since game start
+  if(elapsed<10)return{speed:0.4,radius:[15,26],spawnMs:1800,special:0.08};
+  if(elapsed<20)return{speed:0.7,radius:[13,24],spawnMs:1300,special:0.1};
+  if(elapsed<30)return{speed:1.0,radius:[12,22],spawnMs:1000,special:0.12};
+  if(elapsed<45)return{speed:1.4,radius:[11,20],spawnMs:750,special:0.14};
+  if(elapsed<60)return{speed:1.8,radius:[10,18],spawnMs:550,special:0.15};
+  return{speed:2.2,radius:[9,16],spawnMs:400,special:0.18};
+}
+
+let gElapsed=0; // seconds elapsed
+
 class GT{
-  constructor(special=false){
-    this.r=special?26:Math.random()*18+13;
+  constructor(special=false,diff){
+    const minR=diff.radius[0],maxR=diff.radius[1];
+    this.r=special?22:Math.random()*(maxR-minR)+minR;
     this.x=Math.random()*(GC.width-this.r*2-20)+this.r+10;
     this.y=Math.random()*(GC.height-this.r*2-20)+this.r+10;
-    this.life=special?90:Math.random()*50+35;
+    // Life decreases based on difficulty — targets disappear faster at higher difficulty
+    const baseLife=special?80:Math.random()*40+35;
+    this.life=Math.max(25,baseLife-gDifficulty*4);
     this.max=this.life;
     this.special=special;
     this.hue=special?50:Math.random()*80+310;
     this.ph=Math.random()*Math.PI*2;
     this.alive=true;
-    this.vx=(Math.random()-.5)*(special?1.5:0.8);
-    this.vy=(Math.random()-.5)*(special?1.5:0.8);
+    const spd=diff.speed;
+    this.vx=(Math.random()-.5)*(special?spd*1.6:spd);
+    this.vy=(Math.random()-.5)*(special?spd*1.6:spd);
     this.scale=0;
   }
   update(){
@@ -1748,7 +1753,7 @@ class GT{
     if(this.life<=0)this.alive=false;
   }
   draw(){
-    const p=this.life/this.max,pulse=Math.sin(this.ph)*2+this.scale*this.r;
+    const p=this.life/this.max;
     GX.save();GX.globalAlpha=p;GX.translate(this.x,this.y);GX.scale(this.scale,this.scale);
     const g=GX.createRadialGradient(0,0,0,0,0,this.r*2.5);
     g.addColorStop(0,`hsla(${this.hue},100%,60%,0.3)`);
@@ -1771,10 +1776,7 @@ class GP{
     this.life=1;this.r=Math.random()*3+1;
   }
   update(){this.life-=0.04;this.x+=this.vx;this.y+=this.vy;this.vy+=0.2}
-  draw(){
-    GX.beginPath();GX.arc(this.x,this.y,this.r,0,Math.PI*2);
-    GX.fillStyle=`hsla(${this.hue},100%,60%,${this.life})`;GX.fill();
-  }
+  draw(){GX.beginPath();GX.arc(this.x,this.y,this.r,0,Math.PI*2);GX.fillStyle=`hsla(${this.hue},100%,60%,${this.life})`;GX.fill()}
 }
 
 class ScoreEffect{
@@ -1792,16 +1794,19 @@ function updateUI(){
   document.getElementById('g-lives').textContent=gLives;
   document.getElementById('g-time').textContent=gTime;
   document.getElementById('g-combo').textContent='x'+gCombo;
+  document.getElementById('g-level').textContent=gLevel;
   const pw=Math.min(100,(gComboCount/5)*100);
   document.getElementById('g-pow-bar').style.width=pw+'%';
   document.getElementById('g-pow-lbl').textContent=gComboCount+'/5';
 }
 
-function spawnT(){
+// Adaptive spawning — called recursively with dynamic delay
+function scheduleSpawn(){
   if(!gameRunning)return;
-  if(Math.random()<0.12)gTargets.push(new GT(true));
-  else gTargets.push(new GT(false));
-  setTimeout(spawnT,Math.max(300,1000-gScore*3));
+  const diff=getDifficulty(gElapsed);
+  const special=Math.random()<diff.special;
+  gTargets.push(new GT(special,diff));
+  gNextSpawn=setTimeout(scheduleSpawn,diff.spawnMs);
 }
 
 function drawIdleCanvas(){
@@ -1820,9 +1825,17 @@ function gameLoop(){
   GX.lineWidth=1;
   for(let x=0;x<GC.width;x+=48){GX.beginPath();GX.moveTo(x,0);GX.lineTo(x,GC.height);GX.stroke()}
   for(let y=0;y<GC.height;y+=48){GX.beginPath();GX.moveTo(0,y);GX.lineTo(GC.width,y);GX.stroke()}
+  // Level indicator
   GX.fillStyle=theme==='dark'?'rgba(255,255,255,0.025)':'rgba(0,0,0,0.04)';
   GX.font=`bold ${Math.min(90,GC.width/5)}px Sora,sans-serif`;GX.textAlign='center';GX.textBaseline='middle';
   GX.fillText(gScore,GC.width/2,GC.height/2+14);
+  // Level up flash
+  if(gLevel>1){
+    GX.fillStyle=`rgba(52,199,89,0.04)`;
+    GX.font=`bold 13px Sora,sans-serif`;
+    GX.fillStyle=theme==='dark'?'rgba(52,199,89,0.3)':'rgba(52,199,89,0.5)';
+    GX.fillText(`DARAJA ${gLevel}`,GC.width-70,24);
+  }
   for(let i=gTargets.length-1;i>=0;i--){
     gTargets[i].update();gTargets[i].draw();
     if(!gTargets[i].alive){
@@ -1864,18 +1877,34 @@ GC.addEventListener('touchstart',e=>{e.preventDefault();handleHit(e.touches[0].c
 
 function startGame(){
   initAudio();resizeGC();
-  gameRunning=true;gScore=0;gLives=3;gTime=30;gCombo=1;gComboCount=0;
+  gameRunning=true;gScore=0;gLives=3;gTime=30;gCombo=1;gComboCount=0;gLevel=1;gElapsed=0;
   gTargets=[];gParticles=[];gEffects=[];
   document.getElementById('gbtn-start').style.display='none';
   document.getElementById('gbtn-stop').style.display='';
   updateUI();
-  clearInterval(gTimer);
-  gTimer=setInterval(()=>{gTime--;document.getElementById('g-time').textContent=gTime;if(gTime<=0)endGame()},1000);
-  spawnT();gameLoop();
+  clearInterval(gTimer);clearTimeout(gNextSpawn);
+
+  gTimer=setInterval(()=>{
+    gTime--;gElapsed++;
+    // Update level every 10 seconds
+    const newLevel=Math.floor(gElapsed/10)+1;
+    if(newLevel>gLevel){
+      gLevel=newLevel;
+      // Flash level up on canvas
+      gEffects.push(new ScoreEffect(GC.width/2,GC.height/2-60,`🔥 DARAJA ${gLevel}!`,'#34c759'));
+      beep(900,.15);
+    }
+    document.getElementById('g-time').textContent=gTime;
+    updateUI();
+    if(gTime<=0)endGame();
+  },1000);
+
+  scheduleSpawn();
+  gameLoop();
 }
 
 function endGame(){
-  gameRunning=false;clearInterval(gTimer);cancelAnimationFrame(gAnimId);
+  gameRunning=false;clearInterval(gTimer);cancelAnimationFrame(gAnimId);clearTimeout(gNextSpawn);
   document.getElementById('gbtn-start').style.display='';
   document.getElementById('gbtn-stop').style.display='none';
   const bonus=gLives>0&&gTime<=0?gLives*15:0;gScore+=bonus;
@@ -1897,7 +1926,7 @@ document.getElementById('gbtn-start').addEventListener('click',startGame);
 document.getElementById('gbtn-stop').addEventListener('click',endGame);
 window.addEventListener('resize',()=>{if(gameRunning)resizeGC()});
 
-// ====== LEADERBOARD ======
+// LEADERBOARD
 function getLB(){return JSON.parse(localStorage.getItem('neonBlitz')||'[]')}
 function saveLB(s){const lb=getLB();lb.push({s,d:new Date().toLocaleDateString()});lb.sort((a,b)=>b.s-a.s);localStorage.setItem('neonBlitz',JSON.stringify(lb.slice(0,8)))}
 function renderLB(){
@@ -1912,14 +1941,14 @@ function renderLB(){
   `).join('');
 }
 
-// ====== INIT ======
+// INIT
 document.addEventListener('DOMContentLoaded',()=>{
   setTheme(theme);setLang(lang);
   renderProjs();renderTests();renderBlogs();renderLB();
   resizeGC();drawIdleCanvas();
 });
 
-// ====== LOADER ======
+// LOADER
 window.addEventListener('load',()=>{
   const fill=document.getElementById('loader-fill'),lbl=document.getElementById('loader-lbl');
   let p=0;
